@@ -15,8 +15,8 @@ import scala.io.AnsiColor.*
   Highlight.registerLanguage("html", HighlightXml)
 
 
-  scribe.info(s"${GREEN} $msg${RESET}")
-  scribe.debug(s"${GREEN}${BOLD} $msg ${RESET}")
+  scribe.info(s"$GREEN $msg$RESET")
+  scribe.debug(s"$GREEN$BOLD $msg $RESET")
 
 
 def msg = "Starting HereSdk.ScalaJs demo :)"
