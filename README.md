@@ -36,3 +36,4 @@ We welcome contributions from the developer community to enhance and expand the 
 HereSdk.Scala.js is an unofficial library and is not affiliated with HERE Technologies. It's developed and maintained by a community of developers passionate about making HERE Maps accessible to Scala.js developers.
 
 Unlock the potential of HERE Maps for your Scala.js projects. Get started with HereSdk.Scala.js today and elevate your location-based applications to new heights.
+
