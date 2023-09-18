@@ -1,12 +1,33 @@
+import DependencyVersions.{catsVersion, circeVersion, mtlVersion, scribeVersion}
 import org.portablescala.sbtplatformdeps.PlatformDepsPlugin.autoImport.*
 import sbt.*
 
 object Dependencies {
 
+  val loggingLibs: Def.Initialize[Seq[ModuleID]] = Def.setting {
+    Seq(
+      "com.outr" %%% "scribe-cats" % scribeVersion,
+      "com.outr" %%% "scribe" % scribeVersion
+    )
+  }
+  val typeLevelLibs: Def.Initialize[Seq[ModuleID]] = Def.setting {
+    Seq(
+      "org.typelevel" %%% "cats-effect" % catsVersion,
+      "org.typelevel" %%% "cats-mtl" % mtlVersion,
+    )
+  }
+
+  val circeLibs: Def.Initialize[Seq[ModuleID]] = Def.setting {
+    Seq(
+      "io.circe" %%% "circe-core" % circeVersion,
+      "io.circe" %%% "circe-generic" % circeVersion,
+      "io.circe" %%% "circe-parser" % circeVersion,
+      "io.circe" %%% "circe-literal" % circeVersion
+    )
+  }
   val laminar: Def.Initialize[Seq[ModuleID]] = Def.setting {
     Seq(
-      "com.raquo" %%% "laminar" % DependencyVersions.laminar,
-      "com.outr" %%% "scribe" % DependencyVersions.scribe
+      "com.raquo" %%% "laminar" % DependencyVersions.laminar
     )
   }
 

@@ -41,6 +41,9 @@ lazy val website = project
       Dependencies.`embedded-files-macro`.value,
       Dependencies.sourcecode.value,
       Dependencies.laminar.value,
+      Dependencies.loggingLibs.value,
+      Dependencies.typeLevelLibs.value,
+//      Dependencies.circeLibs.value
     ),
     Compile / fastLinkJS / scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.ESModule) },
     Compile / fullLinkJS / scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.CommonJSModule) },
