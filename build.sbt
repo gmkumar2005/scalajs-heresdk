@@ -9,19 +9,14 @@ lazy val heremaps = project
     name := "scalajs-heresdk",
     version := "0.1.0-SNAPSHOT",
     scalaVersion := scala3Version,
-    libraryDependencies += "com.raquo" %%% "laminar" % "16.0.0",
     libraryDependencies ++=
       Seq.concat(
-        Dependencies.laminar.value,
-        Dependencies.`tuplez-apply`.value,
-        Dependencies.scalatest.value,
-        Dependencies.domtestutils.value,
-        Dependencies.`scala-js-macrotask-executor`.value.map(_ % Test)
+        Dependencies.laminar.value
       ),
     Compile / fastLinkJS / scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.ESModule) },
     Compile / fullLinkJS / scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.CommonJSModule) },
     scalaJSLinkerConfig ~= {
-      _.withModuleKind(ModuleKind.ESModule)
+      _.withModuleKind(ModuleKind.CommonJSModule)
         .withModuleSplitStyle(
           ModuleSplitStyle.SmallModulesFor(List("heremaps"))
         )
@@ -36,30 +31,10 @@ lazy val website = project
     name := "scalajs-heresdk-website",
     version := "0.1.0-SNAPSHOT",
     scalaVersion := scala3Version,
-    libraryDependencies ++= Seq.concat(
-      Dependencies.laminext.value,
-      Dependencies.`embedded-files-macro`.value,
-      Dependencies.sourcecode.value,
-      Dependencies.laminar.value,
-      Dependencies.loggingLibs.value,
-      Dependencies.typeLevelLibs.value,
-//      Dependencies.circeLibs.value
-    ),
-    Compile / fastLinkJS / scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.ESModule) },
-    Compile / fullLinkJS / scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.CommonJSModule) },
-    scalaJSLinkerConfig ~= {
-      _.withModuleKind(ModuleKind.ESModule)
-        .withModuleSplitStyle(
-          ModuleSplitStyle.SmallModulesFor(List("website"))
-        )
-    },
-    Compile / scalaJSLinkerConfig ~= { _.withSourceMap(true) },
-    scalaJSUseMainModuleInitializer := true,
-  )
-  .enablePlugins(ScalaJSPlugin, EmbeddedFilesPlugin, BuildInfoPlugin)
-  .dependsOn(
-    heremaps
-  )
+    mdocIn := file("website/docs"),
+    mdocJS := Some(heremaps)
+      )
+  .enablePlugins(MdocPlugin)
 
 lazy val root = project
   .in(file("."))

@@ -1,6 +1,7 @@
 import DependencyVersions.{catsVersion, circeVersion, mtlVersion, scribeVersion}
 import org.portablescala.sbtplatformdeps.PlatformDepsPlugin.autoImport.*
 import sbt.*
+import sbt.Keys.libraryDependencies
 
 object Dependencies {
 
@@ -39,7 +40,8 @@ object Dependencies {
 
   val domtestutils: Def.Initialize[Seq[ModuleID]] = Def.setting {
     Seq(
-      "com.raquo" %%% "domtestutils" % DependencyVersions.domtestutils % Test
+      "com.raquo" %%% "domtestutils" % DependencyVersions.domtestutils % Test,
+        "org.scala-js" %%% "scalajs-dom" % DependencyVersions.ScalaJsDom,
     )
   }
 

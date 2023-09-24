@@ -9,6 +9,7 @@ object DependencyVersions {
   val circeVersion = "0.14.5"
   val logeffectVersion = "0.17.0"
   val mtlVersion = "1.3.0"
+  val ScalaJsDom = "2.6.0"
 
   // tests
   val `scala-js-macrotask-executor` = "1.1.1"
