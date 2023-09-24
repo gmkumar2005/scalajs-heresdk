@@ -58,9 +58,7 @@ object Dependencies {
       "io.laminext" %%% "core" % DependencyVersions.laminext,
       "io.laminext" %%% "highlight" % DependencyVersions.laminext,
       "io.laminext" %%% "ui" % DependencyVersions.laminext,
-      "io.laminext" %%% "tailwind" % DependencyVersions.laminext,
-      "io.laminext" %%% "util" % DependencyVersions.laminext,
-      "io.laminext" %%% "tailwind-default-theme" % DependencyVersions.laminext
+      "io.laminext" %%% "util" % DependencyVersions.laminext
     )
   }
 

@@ -18,4 +18,7 @@ object DependencyVersions {
   val laminext = "0.16.0"
   val sourcecode = "0.3.0"
   val `embedded-files-macro` = "0.2.4"
+  val WebpackDevServer = "4.13.1"
+  val Webpack = "5.76.2"
+  val scala3Version = "3.3.1"
 }
