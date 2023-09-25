@@ -11,16 +11,64 @@
       "examples/ajax": {
         "title": "Ajax"
       },
+      "examples/clustering": {
+        "title": "Marker Clustering"
+      },
       "examples/controlled-inputs": {
         "title": "Controlled Inputs"
       },
       "examples/counter": {
         "title": "Counter"
       },
+      "examples/data-display": {
+        "title": "GeoJson"
+      },
+      "examples/default-map": {
+        "title": "Default map"
+      },
+      "examples/events": {
+        "title": "Calculating a Location from a Mouse Click"
+      },
+      "examples/fleet-telematics": {
+        "title": "Data Matching with the Advanced Data Sets"
+      },
       "examples/form-state": {
         "title": "Form State & Validation"
       },
+      "examples/geoshapes": {
+        "title": "Polyline on the Map"
+      },
       "examples/hello-world": {
+        "title": "Hello World"
+      },
+      "examples/indoor-map": {
+        "title": "Display an Indoor Map"
+      },
+      "examples/info-bubbles": {
+        "title": "Opening an Infobubble on a Mouse Click"
+      },
+      "examples/map-at-a-specified-location": {
+        "title": "Map at a specified location"
+      },
+      "examples/markers": {
+        "title": "Marker on the Map"
+      },
+      "examples/non-interactive-map": {
+        "title": "Non interactive map"
+      },
+      "examples/resizable-geoshapes": {
+        "title": "Resizable polyline"
+      },
+      "examples/services-routing-geocoding": {
+        "title": "Map with Driving Route from A to B"
+      },
+      "examples/style-editor-integration": {
+        "title": "Set a map style exported from the HERE Style Editor"
+      },
+      "examples/styles-and-layers": {
+        "title": "Change map style at runtime"
+      },
+      "examples/styles": {
         "title": "Hello World"
       },
       "examples/time": {
@@ -44,8 +92,18 @@
     },
     "categories": {
       "Basics": "Basics",
-      "Forms": "Forms",
-      "Integrations": "Integrations"
+      "Data display": "Data display",
+      "Styles and Layers": "Styles and Layers",
+      "Markers": "Markers",
+      "Geoshapes": "Geoshapes",
+      "Resizable Geoshapes": "Resizable Geoshapes",
+      "Clustering": "Clustering",
+      "Events": "Events",
+      "Info Bubbles": "Info Bubbles",
+      "Services - Routing,Geocoding": "Services - Routing,Geocoding",
+      "Integration of Fleet Telematics Services": "Integration of Fleet Telematics Services",
+      "Integration with the HERE Style Editor": "Integration with the HERE Style Editor",
+      "Indoor Map": "Indoor Map"
     }
   },
   "pages-strings": {

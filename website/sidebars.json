@@ -1,7 +1,17 @@
 {
   "examples": {
-    "Basics": ["examples/hello-world", "examples/counter", "examples/time", "examples/todomvc"],
-    "Forms": ["examples/uncontrolled-inputs", "examples/controlled-inputs", "examples/form-state"],
-    "Integrations": ["examples/ajax"]
+    "Basics": ["examples/non-interactive-map", "examples/map-at-a-specified-location"],
+    "Data display": ["examples/data-display"],
+    "Styles and Layers": ["examples/styles-and-layers"],
+    "Markers": ["examples/markers"],
+    "Geoshapes": ["examples/geoshapes"],
+    "Resizable Geoshapes": ["examples/resizable-geoshapes"],
+    "Clustering": ["examples/clustering"],
+    "Events": ["examples/events"],
+    "Info Bubbles": ["examples/info-bubbles"],
+    "Services - Routing,Geocoding": ["examples/services-routing-geocoding"],
+    "Integration of Fleet Telematics Services": ["examples/fleet-telematics"],
+    "Integration with the HERE Style Editor": ["examples/style-editor-integration"],
+    "Indoor Map": ["examples/indoor-map"]
   }
 }

@@ -12,7 +12,7 @@ const siteConfig = {
   organizationName: 'gmkumar2005',
   headerLinks: [
     { doc: 'documentation', label: 'Docs' },
-    { doc: 'examples/hello-world', label: 'Examples' },
+    { doc: 'examples/non-interactive-map', label: 'Examples' },
     { doc: 'resources', label: 'Resources' },
     { blog: true, label: 'News' }
   ],
@@ -64,7 +64,7 @@ const siteConfig = {
   // No .html extensions for paths.
   cleanUrl: true,
   docsUrl: '',
-  cname: 'laminar.dev',
+  cname: 'heresdk.scalajs.dev',
   // Open Graph and Twitter card images.
   // ogImage: 'img/spiral-inverse-logo.svg',
   // twitterImage: 'img/spiral-inverse-logo.svg',
