@@ -171,10 +171,12 @@ hs_err_pid*
 /target/
 /project/**/target/
 /website/**/target/
-/modules/heremaps/**/target/
+/modules/**/target/
+/demos/**/target/
 /test/macro-annot/target/
 /test/files/target/
 /test/target/
 /build-sbt/
 local.sbt
 jitwatch.out
+/modules/heremaps/src/main/scala/website/Secrets.scala
