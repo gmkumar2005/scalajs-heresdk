@@ -1,4 +1,5 @@
 import org.scalajs.linker.interface.ModuleSplitStyle
+import sbt.Keys.libraryDependencies
 
 // Lets me depend on Maven Central artifacts immediately without waiting
 resolvers ++= Resolver.sonatypeOssRepos("public")
@@ -49,7 +50,8 @@ lazy val heremaps = project
         o.startsWith("-Wvalue-discard") || o.startsWith("-Ywarn-value-discard") || o.startsWith("-Ywarn-unused") || o.startsWith("-Wunused")
       }
     },
-    webpackConfigFile := Some(baseDirectory.value / "custom.webpack.config.js")
+    webpackConfigFile := Some(baseDirectory.value / "custom.webpack.config.js"),
+    libraryDependencies += "com.raquo" %%% "laminar" % DependencyVersions.laminar,
   )
 
 lazy val website = project

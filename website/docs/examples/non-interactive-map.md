@@ -84,23 +84,23 @@ import org.scalajs.dom.document
 
 
 windowEvents(_.onLoad).foreach { _ =>
-  val mapContainer = dom.document.createElement("div").asInstanceOf[dom.HTMLElement]
-  mapContainer.setAttribute("id", "mapContainer")
-  mapContainer.style.height = "640px"
-  mapContainer.style.width = "500px"
-  
-  val platform = H.service.Platform(
-    PlatformOptions(apikey = secretKey)
-  )
-  
-  val maptypes = platform.createDefaultLayers()
-  containerNode.appendChild(mapContainer)
-  val berlinMap = new H.Map(
-    document.getElementById("mapContainer"),
-    maptypes.vector.normal.map,
-    MapOptions(zoom = 12, center = MapPoint(13.4, 52.51))
-  )
-  
+   val mapContainer = dom.document.createElement("div").asInstanceOf[dom.HTMLElement]
+   mapContainer.setAttribute("id", "mapContainer")
+   mapContainer.style.height = "480px"
+   mapContainer.style.width = "640px"
+
+   val platform = H.service.Platform(
+      PlatformOptions(apikey = secretKey)
+   )
+
+   val maptypes = platform.createDefaultLayers()
+   containerNode.appendChild(mapContainer)
+   val berlinMap = new H.Map(
+      document.getElementById("mapContainer"),
+      maptypes.vector.normal.map,
+      MapOptions(zoom = 12, center = MapPoint(13.4, 52.51))
+   )
+
 }(unsafeWindowOwner)
 
 ```
