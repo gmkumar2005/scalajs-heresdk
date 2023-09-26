@@ -7,7 +7,7 @@ HereSdk.Scala.js is an unofficial Scala.js binding for the HERE Maps API for Jav
 * [Introduction](#introduction)
 * [Imports](#imports)
 * [Dependencies](#dependencies)
-
+* [Secrets](#secrets)
 
  
 ## Introduction
@@ -44,3 +44,9 @@ Before you begin, ensure you have the following prerequisites in place
 2. Scala 3: Ensure you have Scala 3 installed on your system. 
     
 3. HERE Developer Account: You'll need a HERE Developer account to obtain API credentials. Sign up for one at  [HERE Developer Portal.](https://platform.here.com/sign-up) Here offers a **`Generous free tier`**
+
+## Secrets
+Managing secrets is a common problem in software development. 
+HereSdk.Scala.js provides a simple solution to this problem by using Scala.js `@ScalaJSDefined` annotation to define a Scala object that contains your API credentials. This object is then passed to the `PlatformOptions` constructor to initialize the HERE Maps platform. Here's an example of how to define your API credentials:
+
+

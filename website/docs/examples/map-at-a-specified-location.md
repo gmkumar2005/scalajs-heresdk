@@ -1,6 +1,10 @@
 ---
 title: Map at a specified location
 ---
+
+Display a map at a specified location and zoom level
+This example displays a movable map initially centered on the Brandenburg Gate in the centre of Berlin (52.5159°N, 13.3777°E)
+
 ## //TODO
 The use case involves developing an application that presents a static, non-interactive map by default.
 
@@ -101,7 +105,12 @@ windowEvents(_.onLoad).foreach { _ =>
     maptypes.vector.normal.map,
     MapOptions(zoom = 12, center = MapPoint(13.4, 52.51))
   )
-  
+   berlinMap.setCenter(MapPoint(52.5159, 13.3777),false)
+   berlinMap.setZoom(12, true)
+   
+   windowEvents(_.onLoad).foreach { _ =>
+      berlinMap.getViewPort().resize()
+   }(unsafeWindowOwner)
 }(unsafeWindowOwner)
 
 ```

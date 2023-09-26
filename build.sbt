@@ -3,8 +3,6 @@ import org.scalajs.linker.interface.ModuleSplitStyle
 // Lets me depend on Maven Central artifacts immediately without waiting
 resolvers ++= Resolver.sonatypeOssRepos("public")
 
-
-
 ThisBuild / scalaVersion := DependencyVersions.scala3Version
 
 ThisBuild / crossScalaVersions := Seq(DependencyVersions.scala3Version)
@@ -25,16 +23,14 @@ lazy val heremaps = project
     name := "scalajs-heresdk",
     version := "0.1.0-SNAPSHOT",
     scalaVersion := DependencyVersions.scala3Version,
+    organization := "com.github.gmkumar2005",
     libraryDependencies += "org.scala-js" %%% "scalajs-dom" % DependencyVersions.ScalaJsDom,
     (publish / skip) := true,
     webpackBundlingMode := BundlingMode.LibraryOnly(),
     (installJsdom / version) := DependencyVersions.ScalaJsDom,
     (webpack / version) := DependencyVersions.Webpack,
     (startWebpackDevServer / version) := DependencyVersions.WebpackDevServer,
-    libraryDependencies ++=
-      Seq.concat(
-        Dependencies.laminar.value
-      ),
+
     Compile / fastLinkJS / scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.CommonJSModule) },
     Compile / fullLinkJS / scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.CommonJSModule) },
     scalaJSLinkerConfig ~= {
@@ -74,7 +70,33 @@ lazy val website = project
       "SCALA_VERSION" -> scalaVersion.value
     ),
 
-  )
+  ).dependsOn(heremaps)
+
+lazy val example_01 = project
+  .in(file("modules/example_01"))
+  .enablePlugins(ScalaJSPlugin) // Enable the Scala.js plugin in this project
+  .settings(
+    scalaVersion := DependencyVersions.scala3Version,
+    scalaJSUseMainModuleInitializer := true,
+    Compile / fastLinkJS / scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.ESModule) },
+    Compile / fullLinkJS / scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.ESModule) },
+    Compile / scalaJSLinkerConfig ~= { _.withSourceMap(true) },
+    scalaJSLinkerConfig ~= {
+      _.withModuleKind(ModuleKind.ESModule)
+    },
+    libraryDependencies += "com.raquo" %%% "laminar" % DependencyVersions.laminar,
+  ).dependsOn(heremaps)
+
+lazy val example_02 = project
+  .in(file("demos/example_02"))
+  .enablePlugins(ScalaJSPlugin) // Enable the Scala.js plugin in this project
+  .settings(
+    scalaVersion := DependencyVersions.scala3Version,
+    scalaJSUseMainModuleInitializer := true,
+    scalaJSLinkerConfig ~= { _.withSourceMap(true) },
+    scalaJSLinkerConfig ~= {_.withModuleKind(ModuleKind.ESModule)},
+    libraryDependencies += "com.raquo" %%% "laminar" % DependencyVersions.laminar,
+  ).dependsOn(heremaps)
 
 
 lazy val root = project
@@ -83,5 +105,5 @@ lazy val root = project
     name := "scalajs-heresdk"
   )
   .aggregate(
-    heremaps
+    heremaps,example_01,website
   )

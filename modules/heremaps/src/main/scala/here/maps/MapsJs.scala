@@ -29,7 +29,11 @@ object MapsJs extends js.Object {
     *   {!mapsjs.Map.Options=} opt_options Additional map options (for example a map view)
     */
   @js.native
-  class Map(element: Element, baseLayer: js.Object, opt_options: js.Object) extends js.Object {}
+  class Map(element: Element, baseLayer: js.Object, opt_options: js.Object) extends js.Object {
+    def setCenter(center: MapPoint, opt_animate: Boolean=false): Unit = js.native
+    def setZoom(zoom: Int, opt_animate: Boolean=false): Unit = js.native
+    def getViewPort(): ViewPort = js.native
+  }
   @js.native
   object service extends js.Object {
     @js.native
@@ -37,6 +41,25 @@ object MapsJs extends js.Object {
       def createDefaultLayers(): MapTypes = js.native
     }
   }
+  @js.native
+  object mapevents extends js.Object{
+    @js.native
+    class MapEvents(map: Map) extends js.Object {}
+    @js.native
+    class Behavior(mapEvents: MapEvents) extends js.Object {}
+  }
+  @js.native
+  object ui extends js.Object{
+    @js.native
+    object UI extends js.Object {
+      def createDefault(map: Map, mapTypes: MapTypes): Unit = js.native
+    }
+  }
+}
+
+@js.native
+trait ViewPort extends js.Object {
+  def resize(): Unit = js.native
 }
 
 @js.native
@@ -57,7 +80,7 @@ trait MapTypes extends js.Object {
   def vector: VectorLayer = js.native
 }
 
-class MapOptions(val zoom: UndefOr[Int], val center: UndefOr[MapPoint]) extends js.Object {
+class MapOptions(val zoom: UndefOr[Int]=10, val center: UndefOr[MapPoint],val pixelRation:UndefOr[Double]=1.0) extends js.Object {
   @JSName("apply")
   def apply(zoom: UndefOr[Int], center: UndefOr[MapPoint]): MapOptions =
     new MapOptions(zoom, center)
