@@ -84,8 +84,9 @@ trait MapTypes extends js.Object {
 }
 
 class MapOptions(
-    val zoom: UndefOr[Int] = 10, val center: UndefOr[MapPoint],
-    val pixelRation: UndefOr[Double] = 1.0
+    val zoom: UndefOr[Int] = 10,
+    val center: UndefOr[MapPoint],
+    val pixelRatio: UndefOr[Double] = 1.0
 ) extends js.Object {
   @JSName("apply")
   def apply(zoom: UndefOr[Int], center: UndefOr[MapPoint]): MapOptions =

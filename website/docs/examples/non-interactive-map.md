@@ -1,106 +1,140 @@
 ---
 title: Non interactive map
 ---
+## Introduction
 The use case involves developing an application that presents a static, non-interactive map by default.
+In this particular scenario, our objective is to showcase a map that remains non-interactive, with a fixed center point at a predefined location and a constant zoom level. 
 
-This implementation uses `scalajs` with `Laminar` code to display the map in an HTML page and consists of the following steps:
+This implementation uses `scalajs` with `Laminar` code to display the map in an HTML page.
+To achieve this desired effect, the following steps are involved.
 
-## Viewport meta-tag
+### Viewport meta-tag
 To ensure optimum performance on mobile devices, add the following meta-tag to the <head> section of the HTML page:
 ```html
 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
 ```
-
-## Imports
+### Imports
 You need to import the necessary `Scala.js` modules and classes into your project. Here are the typical imports you'll need:
 ```scala
 import com.raquo.laminar.api.L.{*, given}
-import here.maps.{MapOptions, MapPoint, PlatformOptions, MapsJs as H}
-import org.scalajs.dom
+import here.maps.{MapOptions, MapPoint, MapTypes, PlatformOptions, MapsJs as H}
 import org.scalajs.dom.document
 ```
+### Step 1. Obtain the platform apikey you received on registration. 
+In your own code, replace variable window.apikey with your own apikey. Follow the best practices to store your apikey in a secure location.
+```scala
+val _secretKey = website.Secrets.hereApiKey
+```
+### Step 2. Create a container which will be used to display the map.
+```scala
+val demoContainer =
+   div(idAttr := "demoContainer", height := "460px", width := "640px")
+```
 
-A crucial aspect of crafting a functional application involves establishing seamless communication with the backend services offered by HERE REST APIs. In our particular scenario, these backend services diligently handle requests for map data, ensuring its prompt retrieval and subsequent presentation within the application.
+### Step 3. Render the container on the page. 
+Laminar's `renderOnDomContentLoaded` function is used to render the application in response to the browser firing the DOMContentLoaded event.
+```scala
+renderOnDomContentLoaded(
+   containerNode,
+   demoContainer
+)
+```
 
-Initiate the process by creating a Platform object, an integral component of your application's architecture. To set up this Platform object, you will need to provide the unique API key that you received upon registration. This API key serves as your secure access pass to unlock the full capabilities, enabling your application to interact with a wide range of location-based services and functionalities.
+A crucial aspect of crafting a functional application involves establishing seamless communication with the backend services offered by HERE REST APIs. 
+In our particular scenario, these backend services diligently handle requests for map data, ensuring its prompt retrieval and subsequent presentation within the application.
 
+Initiate the process by creating a Platform object, an integral component of your application's architecture. 
+To set up this Platform object, you will need to provide the `Unique API key` that you received upon registration. This API key serves as your secure access pass to unlock the full capabilities, enabling your application to interact with a wide range of location-based services and functionalities.
+
+### Step 4. Create a PlatformOptions object, specifying the API key.
 ```scala
 val platform = H.service.Platform(
     PlatformOptions(apikey = secretKey)
   )
+val mapTypes: MapTypes = platform.createDefaultLayers()
 ```
 
-This object offers a suite of methods that simplify the creation of comprehensive service stubs. These stubs are essentially functional placeholders for essential services, including map tile service stubs, routing service stubs, and more. They serve as the building blocks upon which you can construct and integrate various location-based functionalities into your application effortlessly.
+This object offers a suite of methods that simplify the creation of comprehensive service stubs. 
+These stubs are essentially functional placeholders for essential services, including map tile service stubs, routing service stubs, and more. 
+They serve as the building blocks upon which you can construct and integrate various location-based functionalities into your application effortlessly.
 
-In this particular scenario, our objective is to showcase a map that remains non-interactive, with a fixed center point at a predefined location and a constant zoom level. To achieve this desired effect, the following steps are involved:
-
-1. Create an HTML container element in which the map can be rendered (for example, a `div`).
-```scala
-val mapContainer = dom.document.createElement("div").asInstanceOf[dom.HTMLElement]
-```
-2. Set the height and width of the container element.
-```scala
-mapContainer.style.height = "640px"
-mapContainer.style.width = "500px"
-```
-3. Append the container element to the DOM.
-```scala
-containerNode.appendChild(mapContainer)
-```
-4. Instantiate an `H.Map` object, specifying:
-   - the map container element
+### Step 5. Initialize a map - this map is centered over Berlin.
+Instantiate an `H.Map` object, specifying:
+   - the map container element `demoContainer.ref`. `ref` is a reference to the underlying DOM element.
    - the map type to use eg. `maptypes.vector.normal.map`
-   - the zoom level at which to display the map
+   - the zoom level at which to display the map eg. `zoom = 10`
    - the geographic coordinates of the point on which to center the map
 
 ```scala
 val berlinMap = new H.Map(
-    document.getElementById("mapContainer"),
-    maptypes.vector.normal.map,
-    MapOptions(zoom = 12, center = MapPoint(13.4, 52.51))
-  )
+   demoContainer.ref,
+   mapTypes.vector.normal.map,
+   MapOptions(center = MapPoint(13.4, 52.5), zoom = 10)
+)
 ```
-## Waiting for the page to load
-For the map to be rendered properly on the page, it is necessary to wait for the page to load completely. This can be achieved by using the `windowEvents` function from the `Laminar` library. The `windowEvents` function returns an `EventStream` that emits an event whenever the specified event occurs on the window object. In this case, the `onLoad` event is used to wait for the page to load completely.
+### Step 6. Waiting for the page to load
+For the map to be rendered properly on the page, it is necessary to wait for the page to load completely. 
+This can be achieved by using the `windowEvents` function from the `Laminar` library. 
+The `windowEvents` function returns an `EventStream` that emits an event whenever the specified event occurs on the window object. 
+In this case, the `onLoad` event is used to wait for the page to load completely.
+Add a resize listener to make sure that the map occupies the whole container `onLoad`
 ```scala 
 windowEvents(_.onLoad).foreach { _ =>
-  // map initialization code goes here
+   berlinMap.getViewPort().resize()
 }(unsafeWindowOwner)
 ```
-
-## Complete code
-<div class="mdoc-example">
-
-```scala mdoc:js:invisible:shared
-val secretKey = website.Secrets.hereApiKey
+### Step 7. Watch for resize events
+Add a resize listener to make sure that the map occupies the whole container `onResize`
+```scala 
+windowEvents(_.onResize).foreach { _ =>
+   berlinMap.getViewPort().resize()
+}(unsafeWindowOwner)
 ```
-
+## Complete code and Live demo
+<div class="mdoc-example">
 
 ```scala mdoc:js
 import com.raquo.laminar.api.L.{*, given}
-import here.maps.{MapOptions, MapPoint, PlatformOptions, MapsJs as H}
-import org.scalajs.dom
+import here.maps.{MapOptions, MapPoint, MapTypes, PlatformOptions, MapsJs as H}
 import org.scalajs.dom.document
 
+// Step 1. Obtain the platform apikey
+// In your own code, replace variable window.apikey with your own apikey
+val _secretKey = website.Secrets.hereApiKey
 
+// Step 2. Create a container which will be used to display the map.
+val demoContainer =
+   div(idAttr := "demoContainer", height := "460px", width := "640px")
+// Step 3. Render the container on the page
+renderOnDomContentLoaded(
+   containerNode,
+   demoContainer
+)
+
+// Step 4. initialize communication with the platform
+val platform = H.service.Platform(
+   PlatformOptions(
+      apikey = _secretKey
+   )
+)
+val mapTypes: MapTypes = platform.createDefaultLayers()
+// Step 5. Initialize a map - this map is centered over Berlin
+val berlinMap = new H.Map(
+   demoContainer.ref,
+   mapTypes.vector.normal.map,
+   MapOptions(center = MapPoint(13.4, 52.5), zoom = 10)
+)
+
+// Step 6. Add a resize listener to make sure 
+// that the map occupies the whole container onLoad
 windowEvents(_.onLoad).foreach { _ =>
-   val mapContainer = dom.document.createElement("div").asInstanceOf[dom.HTMLElement]
-   mapContainer.setAttribute("id", "mapContainer")
-   mapContainer.style.height = "480px"
-   mapContainer.style.width = "640px"
+   berlinMap.getViewPort().resize()
+}(unsafeWindowOwner)
 
-   val platform = H.service.Platform(
-      PlatformOptions(apikey = secretKey)
-   )
-
-   val maptypes = platform.createDefaultLayers()
-   containerNode.appendChild(mapContainer)
-   val berlinMap = new H.Map(
-      document.getElementById("mapContainer"),
-      maptypes.vector.normal.map,
-      MapOptions(zoom = 12, center = MapPoint(13.4, 52.51))
-   )
-
+// Step 7. Add a resize listener to make sure 
+// that the map occupies the whole container onResize
+windowEvents(_.onResize).foreach { _ =>
+   berlinMap.getViewPort().resize()
 }(unsafeWindowOwner)
 
 ```

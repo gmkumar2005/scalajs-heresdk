@@ -65,7 +65,7 @@ lazy val website = project
     mdocVariables := Map(
       "js-mount-node" -> "containerNode",
       "js-batch-mode" -> "true",
-      "js-opt"->"fast",
+      "js-opt"->"full",
       // Use full to obfuscate the secrets
       //  // Use these as @VERSION@ in mdoc-processed .md files
       //  "LAMINAR_VERSION" -> version.value.replace("-SNAPSHOT", ""), // This can return incorrect version too easily
