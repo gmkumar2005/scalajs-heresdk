@@ -21,7 +21,7 @@ import here.maps.{MapOptions, MapPoint, MapTypes, PlatformOptions, MapsJs as H}
 import org.scalajs.dom.document
 ```
 ### Step 1. Obtain the platform apikey you received on registration. 
-In your own code, replace variable window.apikey with your own apikey. Follow the best practices to store your apikey in a secure location.
+In your own code, replace variable `_secretKey` with your own apikey. Follow the best practices to store your apikey in a secure location.
 ```scala
 val _secretKey = website.Secrets.hereApiKey
 ```
