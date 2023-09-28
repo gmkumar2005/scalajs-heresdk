@@ -47,6 +47,14 @@ Before you begin, ensure you have the following prerequisites in place
 
 ## Secrets
 Managing secrets is a common problem in software development. 
-HereSdk.Scala.js provides a simple solution to this problem by using Scala.js `@ScalaJSDefined` annotation to define a Scala object that contains your API credentials. This object is then passed to the `PlatformOptions` constructor to initialize the HERE Maps platform. Here's an example of how to define your API credentials:
+HereSdk.Scala.js provides a simple solution to this problem by using Scala.js a standard Scala object that contains your API credentials. 
+This object is then passed to the `PlatformOptions` constructor to initialize the HERE Maps platform. Here's an example of how to define your API credentials
+
+**Note:** Don't commit this file to the git or any other source code repository.
+```scala
+object Secrets {
+  val hereApiKey = "Replace with your API key"
+}
+```
 
 
